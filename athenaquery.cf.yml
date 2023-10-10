@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  AthenaNamedQuery:
+    Type: AWS::Athena::NamedQuery
+    Properties:
+      Database: "vehiclesnyc"
+      Description: "A query that selects all vehicles that active."
+      Name: "ForHireVehicles"
+      QueryString: > 
+                    SELECT name, base_number, base_address, active, base_name
+                    FROM vehiclesnyc
+                    WHERE active = YES
+                  
+Outputs:
+  AthenaNamedQuery:
+    Value: !Ref AthenaNamedQuery

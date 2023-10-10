@@ -1,0 +1,18 @@
+
+
+
+#Create S3 Bucket
+aws s3api create-bucket --bucket nycdatafhv --region us-east-1
+
+#Upload File to s3
+aws s3 cp fhv_nyc.csv s3://nycdatafhv
+
+#cloudformation stack validation
+aws cloudformation validate-template --template-body file://athenaquery.cf.yml
+
+#cf list cf queries
+aws athena list-named-queries
+
+#cf stack template 
+aws cloudformation create-stack --stack-name athenaquery  --template-body file://athenaquery.cf.yml
+
